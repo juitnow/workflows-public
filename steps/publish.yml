@@ -1,0 +1,24 @@
+# ============================================================================ #
+# TAG, RELEASE AND PUBLISH                                                     #
+# ---------------------------------------------------------------------------- #
+# Create our tag from `package.json`'s version, a release, and publis to NPM   #
+# ============================================================================ #
+
+name: Publish Package
+run: |
+  VERSION="$(node -p 'require("./package.json").version')"
+
+  git config user.email 'developers@juit.com'
+  git config user.name 'Github Workflows'
+  git tag -a -m "v${VERSION}" "v${VERSION}" "${{ github.sha }}"
+  git push --tags
+
+  gh release create "v${VERSION}" \
+    --title "Release ${VERSION}" \
+    --target "${{ github.sha }}" \
+    --verify-tag
+
+  npm publish
+env:
+  NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
+  GH_TOKEN: ${{ github.token }}

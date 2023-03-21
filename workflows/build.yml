@@ -1,0 +1,13 @@
+name: &name Build Package
+
+on: workflow_call
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: *name
+
+    steps:
+      - !include ../steps/checkout.yml
+      - !include ../steps/setup-node.yml
+      - !include ../steps/build.yml

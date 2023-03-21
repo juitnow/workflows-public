@@ -1,0 +1,14 @@
+name: &name Release Package
+
+on: workflow_call
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    name: *name
+
+    steps:
+      - !include ../steps/checkout.yml
+      - !include ../steps/setup-node.yml
+      - !include ../steps/build.yml
+      - !include ../steps/publish.yml

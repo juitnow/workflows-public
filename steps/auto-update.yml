@@ -1,0 +1,25 @@
+# ============================================================================ #
+# AUTOMATIC UPDATES                                                            #
+# ---------------------------------------------------------------------------- #
+# Check and update dependencies in `package.json`, then (if found) wipe and    #
+# reinstall everything, build, and if the build passes, push a commit with the #
+# changes                                                                      #
+# ============================================================================ #
+
+name: Check and apply dependencies updates
+run: |
+  # Check for updates, and exit script on error / no updates found
+  npx '@juit/check-updates' --quick --bump || exit $(( $? == 255 ? 0 : $? ))
+
+  # If still here, just run a full package update and install dependencies
+  rm -rf node-modules package-lock.json
+  npm install
+
+  # Build our package
+  npm run build
+
+  # Commit all changes and push them back to the repo
+  git config user.email 'developers@juit.com'
+  git config user.name 'Automatic Updates'
+  git commit -a -m "Release for automatic updates $(date '+%Y-%m-%d %H:%M:%S')"
+  git push -u origin '${{ github.ref_name }}'

@@ -1,0 +1,13 @@
+name: &name Automatic Updates
+
+on: workflow_call
+
+jobs:
+  auto-update:
+    runs-on: ubuntu-latest
+    name: *name
+
+    steps:
+      - !include ../steps/checkout.yml
+      - !include ../steps/setup-node.yml
+      - !include ../steps/auto-update.yml
