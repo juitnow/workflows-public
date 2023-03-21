@@ -1,0 +1,20 @@
+{
+  "name": "@juitnow/workflows-public",
+  "description": "Shared workflows for Juit public/open source repositories.",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "build": "./build.sh"
+  },
+  "devDependencies": {
+    "yaml": "^2.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/juitnow/workflows-public.git"
+  },
+  "bugs": {
+    "url": "https://github.com/juitnow/workflows-public/issues"
+  },
+  "homepage": "https://github.com/juitnow/workflows-public#readme"
+}
