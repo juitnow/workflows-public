@@ -16,7 +16,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.git_token }}
+          token: ${{ secrets.git_token || github.token }}
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
