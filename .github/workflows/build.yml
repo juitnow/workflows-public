@@ -1,0 +1,25 @@
+# =================================================== #
+# Automatically Generated Workflow File, DO NOT EDIT! #
+# =================================================== #
+
+name: Build Package
+on: workflow_call
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build Package
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.git_token }}
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          registry-url: https://registry.npmjs.org
+      - name: Build Package
+        run: |
+          npm clean-install
+          npm run build
+
