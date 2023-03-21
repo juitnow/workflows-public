@@ -1,6 +1,12 @@
 name: &name Release Package
 
-on: workflow_call
+on:
+  workflow_call:
+    secrets:
+      git_token:
+        required: true
+      npm_token:
+        required: true
 
 jobs:
   release:

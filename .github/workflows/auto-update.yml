@@ -3,7 +3,11 @@
 # =================================================== #
 
 name: Automatic Updates
-on: workflow_call
+on:
+  workflow_call:
+    secrets:
+      git_token:
+        required: true
 jobs:
   auto-update:
     runs-on: ubuntu-latest

@@ -1,6 +1,10 @@
 name: &name Build Package
 
-on: workflow_call
+on:
+  workflow_call:
+    secrets:
+      git_token:
+        required: true
 
 jobs:
   build:
