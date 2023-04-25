@@ -7,7 +7,7 @@
     "build": "./build.sh"
   },
   "devDependencies": {
-    "yaml": "^2.2.1"
+    "yaml": "^2.2.2"
   },
   "repository": {
     "type": "git",
