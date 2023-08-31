@@ -1,0 +1,38 @@
+# =================================================== #
+# Automatically Generated Workflow File, DO NOT EDIT! #
+# =================================================== #
+
+name: Build Package
+on:
+  workflow_call:
+    secrets:
+      git_token:
+        required: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build Package
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: github
+          POSTGRES_PASSWORD: github
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.git_token || github.token }}
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          registry-url: https://registry.npmjs.org
+      - name: Build Package
+        run: |
+          npm clean-install
+          npm run build
+

@@ -1,0 +1,21 @@
+name: &name Build Package
+
+on:
+  workflow_call:
+    secrets:
+      git_token:
+        required: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: *name
+
+    services:
+      postgres:
+        !include ../services/postgres.yml
+
+    steps:
+      - !include ../steps/checkout.yml
+      - !include ../steps/setup-node.yml
+      - !include ../steps/build.yml
