@@ -48,4 +48,9 @@ jobs:
           git config user.name 'Automatic Updates'
           git commit -a -m "Release for automatic updates $(date '+%Y-%m-%d %H:%M:%S')"
           git push -u origin '${{ github.ref_name }}'
+        env:
+          PGPASSWORD: github
+          PGHOST: localhost
+          PGUSER: github
+          PGPORT: 5432
 

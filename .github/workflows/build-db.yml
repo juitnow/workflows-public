@@ -35,4 +35,9 @@ jobs:
         run: |
           npm clean-install
           npm run build
+        env:
+          PGPASSWORD: github
+          PGHOST: localhost
+          PGUSER: github
+          PGPORT: 5432
 

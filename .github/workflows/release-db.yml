@@ -37,6 +37,11 @@ jobs:
         run: |
           npm clean-install
           npm run build
+        env:
+          PGPASSWORD: github
+          PGHOST: localhost
+          PGUSER: github
+          PGPORT: 5432
       - name: Publish Package
         run: |
           VERSION="$(node -p 'require("./package.json").version')"
