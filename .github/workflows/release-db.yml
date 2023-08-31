@@ -2,7 +2,7 @@
 # Automatically Generated Workflow File, DO NOT EDIT! #
 # =================================================== #
 
-name: Release Package
+name: Release Package (with DB)
 on:
   workflow_call:
     secrets:
@@ -13,7 +13,7 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    name: Release Package
+    name: Release Package (with DB)
     services:
       postgres:
         image: postgres:13

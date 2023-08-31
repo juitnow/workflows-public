@@ -1,4 +1,4 @@
-name: &name Release Package
+name: &name Release Package (with DB)
 
 on:
   workflow_call:
