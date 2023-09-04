@@ -8,6 +8,11 @@ on:
     secrets:
       git_token:
         required: true
+    inputs:
+      workspaces:
+        type: boolean
+        required: false
+        default: false
 jobs:
   auto-update:
     runs-on: ubuntu-latest
@@ -38,10 +43,10 @@ jobs:
 
           # If still here, just run a full package update and install dependencies
           rm -rf node-modules package-lock.json
-          npm install
+          npm install ${{ inputs.workspaces && '--workspaces' }}
 
           # Build our package
-          npm run build
+          npm run build ${{ inputs.workspaces && '--workspaces' }}
 
           # Commit all changes and push them back to the repo
           git config user.email 'developers@juit.com'

@@ -5,6 +5,11 @@ on:
     secrets:
       git_token:
         required: false
+    inputs:
+      workspaces:
+        type: boolean
+        required: false
+        default: false
 
 jobs:
   build:
