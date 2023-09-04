@@ -24,7 +24,7 @@ run: |
     --target "${{ github.sha }}" \
     --verify-tag
 
-  npm publish ${{ inputs.workspaces && '--workspaces' }}
+  npm publish ${{ inputs.workspaces && '--workspaces' || '' }}
 env:
   NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
   GH_TOKEN: ${{ github.token }}

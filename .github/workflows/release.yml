@@ -31,8 +31,8 @@ jobs:
           registry-url: https://registry.npmjs.org
       - name: Build Package
         run: |
-          npm clean-install ${{ inputs.workspaces && '--workspaces' }}
-          npm run build ${{ inputs.workspaces && '--workspaces' }}
+          npm clean-install ${{ inputs.workspaces && '--workspaces' || '' }}
+          npm run build ${{ inputs.workspaces && '--workspaces' || '' }}
         env:
           PGPASSWORD: github
           PGHOST: localhost
@@ -58,7 +58,7 @@ jobs:
             --target "${{ github.sha }}" \
             --verify-tag
 
-          npm publish ${{ inputs.workspaces && '--workspaces' }}
+          npm publish ${{ inputs.workspaces && '--workspaces' || '' }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
           GH_TOKEN: ${{ github.token }}

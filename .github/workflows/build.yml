@@ -29,8 +29,8 @@ jobs:
           registry-url: https://registry.npmjs.org
       - name: Build Package
         run: |
-          npm clean-install ${{ inputs.workspaces && '--workspaces' }}
-          npm run build ${{ inputs.workspaces && '--workspaces' }}
+          npm clean-install ${{ inputs.workspaces && '--workspaces' || '' }}
+          npm run build ${{ inputs.workspaces && '--workspaces' || '' }}
         env:
           PGPASSWORD: github
           PGHOST: localhost
