@@ -45,10 +45,10 @@ jobs:
 
           # If still here, just run a full package update and install dependencies
           rm -rf node-modules package-lock.json
-          npm install ${{ inputs.workspaces && '--workspaces' || '' }}
+          npm install ${{ inputs.workspaces && '--include-workspace-root --workspaces' || '' }}
 
           # Build our package
-          npm run build ${{ inputs.workspaces && '--workspaces' || '' }}
+          npm run build
 
           # Commit all changes and push them back to the repo
           git config user.email 'developers@juit.com'
