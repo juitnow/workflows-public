@@ -6,7 +6,7 @@
 
 name: Build Package
 run: |
-  npm clean-install ${{ inputs.workspaces && '--include-workspace-root --workspaces' || '' }}
+  npm clean-install
   npm run build
 env:
   PGPASSWORD: github

@@ -10,11 +10,6 @@ on:
         required: false
       npm_token:
         required: true
-    inputs:
-      workspaces:
-        type: boolean
-        required: false
-        default: false
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -31,7 +26,7 @@ jobs:
           registry-url: https://registry.npmjs.org
       - name: Build Package
         run: |
-          npm clean-install ${{ inputs.workspaces && '--include-workspace-root --workspaces' || '' }}
+          npm clean-install
           npm run build
         env:
           PGPASSWORD: github
@@ -58,7 +53,8 @@ jobs:
             --target "${{ github.sha }}" \
             --verify-tag
 
-          npm publish ${{ inputs.workspaces && '--workspaces' || '' }}
+          node -e 'process.exitCode=require("./package.json").workspaces?1:0' && \\
+            npm publish || npm publish --workspaces
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
           GH_TOKEN: ${{ github.token }}

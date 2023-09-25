@@ -8,11 +8,6 @@ on:
     secrets:
       git_token:
         required: false
-    inputs:
-      workspaces:
-        type: boolean
-        required: false
-        default: false
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -38,7 +33,7 @@ jobs:
           registry-url: https://registry.npmjs.org
       - name: Build Package
         run: |
-          npm clean-install ${{ inputs.workspaces && '--include-workspace-root --workspaces' || '' }}
+          npm clean-install
           npm run build
         env:
           PGPASSWORD: github

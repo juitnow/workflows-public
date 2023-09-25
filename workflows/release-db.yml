@@ -7,11 +7,6 @@ on:
         required: false
       npm_token:
         required: true
-    inputs:
-      workspaces:
-        type: boolean
-        required: false
-        default: false
 
 jobs:
   release:

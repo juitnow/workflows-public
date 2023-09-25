@@ -8,11 +8,6 @@ on:
     secrets:
       git_token:
         required: true
-    inputs:
-      workspaces:
-        type: boolean
-        required: false
-        default: false
 jobs:
   auto-update:
     runs-on: ubuntu-latest
@@ -30,13 +25,12 @@ jobs:
       - name: Check and apply dependencies updates
         run: |
           # Check for updates, and exit script on error / no updates found
-          node -p '(require("./package.json").workspaces || []).map(d => `${d}/package.json`).join("\n")' | {
-            xargs npx '@juit/check-updates@latest' --quick --bump -- package.json || echo $(( $? == 255 ? 0 : $? ))
-          }
+          npx '@juit/check-updates' --quick --bump || exit $(( $? == 255 ? 0 : $? ))
 
           # If still here, just run a full package update and install dependencies
           rm -rf node-modules package-lock.json
-          npm install ${{ inputs.workspaces && '--include-workspace-root --workspaces' || '' }}
+          node -e 'process.exitCode=require("./package.json").workspaces?1:0' && \\
+            npm install || npm install --workspaces --include-workspace-root
 
           # Build our package
           npm run build
