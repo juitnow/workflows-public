@@ -7,7 +7,7 @@
     "build": "./build.sh"
   },
   "devDependencies": {
-    "yaml": "^2.3.4"
+    "yaml": "^2.4.1"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,6 @@
   "bugs": {
     "url": "https://github.com/juitnow/workflows-public/issues"
   },
-  "homepage": "https://github.com/juitnow/workflows-public#readme"
+  "homepage": "https://github.com/juitnow/workflows-public#readme",
+  "version": "0.0.1"
 }
