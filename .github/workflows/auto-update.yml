@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           registry-url: https://registry.npmjs.org
-          node-version: 20
+          node-version: 22
       - name: Check and apply dependencies updates
         run: |
           # Check for updates, and exit script on error / no updates found
