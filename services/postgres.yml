@@ -1,4 +1,4 @@
-image: postgres:13
+image: postgres:16
 env:
   POSTGRES_USER: github
   POSTGRES_PASSWORD: github
