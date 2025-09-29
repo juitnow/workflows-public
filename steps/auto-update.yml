@@ -14,7 +14,7 @@ run: |
   # If still here, just run a full package update and install dependencies
   rm -rf node-modules package-lock.json
   node -e 'process.exitCode=require("./package.json").workspaces?1:0' && \
-    npm install || npm install --workspaces --include-workspace-root
+    npm install --ignore-scripts || npm install --ignore-scripts --workspaces --include-workspace-root
 
   # Build our package
   npm run build
