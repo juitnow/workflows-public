@@ -46,6 +46,9 @@ jobs:
             exit 0
           }
 
+          node -e 'process.exitCode=require("./package.json").workspaces?1:0' && \
+            npm publish || npm publish --workspaces
+
           git config user.email 'developers@juit.com'
           git config user.name 'Github Workflows'
           git tag -a -m "v${VERSION}" "v${VERSION}" "${{ github.sha }}"
@@ -55,9 +58,6 @@ jobs:
             --title "Release ${VERSION}" \
             --target "${{ github.sha }}" \
             --verify-tag
-
-          node -e 'process.exitCode=require("./package.json").workspaces?1:0' && \
-            npm publish || npm publish --workspaces
         env:
           GH_TOKEN: ${{ github.token }}
       - name: Send Email Notification
