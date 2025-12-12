@@ -49,6 +49,8 @@ jobs:
 
           node -e 'process.exitCode=require("./package.json").workspaces?1:0' && \
             npm publish || npm publish --workspaces
+        env:
+          GH_TOKEN: ${{ github.token }}
       - name: Send Email Notification
         if: ${{ !success() }}
         uses: dawidd6/action-send-mail@v6

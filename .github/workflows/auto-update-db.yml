@@ -54,7 +54,6 @@ jobs:
           git commit -a -m "Release for automatic updates $(date '+%Y-%m-%d %H:%M:%S')"
           git push -u origin '${{ github.ref_name }}'
         env:
-          GH_TOKEN: ${{ github.token }}
           PGPASSWORD: github
           PGHOST: localhost
           PGUSER: github
