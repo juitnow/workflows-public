@@ -26,5 +26,3 @@ run: |
 
   node -e 'process.exitCode=require("./package.json").workspaces?1:0' && \
     npm publish || npm publish --workspaces
-env:
-  GH_TOKEN: ${{ github.token }}

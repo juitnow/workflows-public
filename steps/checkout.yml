@@ -1,11 +1,6 @@
 # ============================================================================ #
 # CHECKOUT REPOSITORY                                                          #
-# ---------------------------------------------------------------------------- #
-# We use the `git_token` secret to check out the repository (always) so that   #
-# we can bypass branch protection when pushing changes from automatic updates  #
 # ============================================================================ #
 
 name: Checkout Repository
 uses: actions/checkout@v4
-with:
-  token: ${{ secrets.git_token || github.token }}
