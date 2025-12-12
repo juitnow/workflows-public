@@ -48,8 +48,8 @@ jobs:
             --target "${{ github.sha }}" \
             --verify-tag
 
-          node -e 'process.exitCode=require("./package.json").workspaces?1:0' && \
-            npm publish || npm publish --workspaces
+          # node -e 'process.exitCode=require("./package.json").workspaces?1:0' && \
+          #   npm publish || npm publish --workspaces
       - name: Send Email Notification
         if: ${{ !success() }}
         uses: dawidd6/action-send-mail@v6
@@ -71,4 +71,3 @@ jobs:
             The GitHub Action **`${{ github.workflow }}`** in repository **`${{ github.repository }}`** ${{ job.status == 'cancelled' && 'was **canceled**' || 'has **failed**' }}.
 
             Build logs are available _[here](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})_.
-
