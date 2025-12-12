@@ -12,7 +12,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
           fetch-depth: 0
       - name: Setup NodeJS
         uses: actions/setup-node@v4
@@ -30,7 +29,6 @@ jobs:
           PGPORT: 5432
       - name: Publish Package
         run: |
-          set -xv
           VERSION="$(node -p 'require("./package.json").version')"
 
           test -z "$(git ls-remote --tags origin "v${VERSION}")" || {
@@ -49,8 +47,8 @@ jobs:
             --target "${{ github.sha }}" \
             --verify-tag
 
-          # node -e 'process.exitCode=require("./package.json").workspaces?1:0' && \
-          #   npm publish || npm publish --workspaces
+          node -e 'process.exitCode=require("./package.json").workspaces?1:0' && \
+            npm publish || npm publish --workspaces
       - name: Send Email Notification
         if: ${{ !success() }}
         uses: dawidd6/action-send-mail@v6
@@ -72,3 +70,4 @@ jobs:
             The GitHub Action **`${{ github.workflow }}`** in repository **`${{ github.repository }}`** ${{ job.status == 'cancelled' && 'was **canceled**' || 'has **failed**' }}.
 
             Build logs are available _[here](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})_.
+
