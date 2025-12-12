@@ -10,5 +10,6 @@ jobs:
     steps:
       - !include ../steps/checkout.yml
       - !include ../steps/setup-node.yml
+      - !include ../steps/auto-update-auth.yml
       - !include ../steps/auto-update.yml
       - !include ../steps/email.yml
