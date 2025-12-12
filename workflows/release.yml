@@ -18,3 +18,4 @@ jobs:
       - !include ../steps/setup-node.yml
       - !include ../steps/build.yml
       - !include ../steps/publish.yml
+      - !include ../steps/email.yml

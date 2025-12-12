@@ -19,3 +19,4 @@ jobs:
       - !include ../steps/checkout.yml
       - !include ../steps/setup-node.yml
       - !include ../steps/build.yml
+      - !include ../steps/email.yml
