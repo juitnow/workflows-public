@@ -29,6 +29,7 @@ jobs:
           PGUSER: github
           PGPORT: 5432
       - name: Publish Package
+        shell: /usr/bin/bash -exv
         run: |
           VERSION="$(node -p 'require("./package.json").version')"
 
