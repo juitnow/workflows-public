@@ -25,6 +25,12 @@ jobs:
         with:
           registry-url: https://registry.npmjs.org
           node-version: 24
+      - name: Generate GitHub App Token
+        uses: actions/create-github-app-token@v2
+        id: auto-update-token
+        with:
+          app-id: ${{ secrets.AUTO_UPDATES_APP_ID }}
+          private-key: ${{ secrets.AUTO_UPDATES_APP_PRIVATE_KEY }}
       - name: Check and apply dependencies updates
         run: |
           # Check for updates, and exit script on error / no updates found
@@ -44,6 +50,7 @@ jobs:
           git commit -a -m "Release for automatic updates $(date '+%Y-%m-%d %H:%M:%S')"
           git push -u origin '${{ github.ref_name }}'
         env:
+          GITHUB_TOKEN: ${{ steps.auto-update-token.outputs.token }}
           PGPASSWORD: github
           PGHOST: localhost
           PGUSER: github
