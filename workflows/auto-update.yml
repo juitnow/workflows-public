@@ -1,10 +1,6 @@
 name: &name Automatic Updates
 
-on:
-  workflow_call:
-    secrets:
-      git_token:
-        required: true
+on: workflow_call
 
 jobs:
   auto-update:

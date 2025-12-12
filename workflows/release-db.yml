@@ -1,10 +1,6 @@
 name: &name Release Package (with DB)
 
-on:
-  workflow_call:
-    secrets:
-      git_token:
-        required: false
+on: workflow_call
 
 jobs:
   release:
