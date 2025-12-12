@@ -45,4 +45,25 @@ jobs:
           PGHOST: localhost
           PGUSER: github
           PGPORT: 5432
+      - name: Send Email Notification
+        if: ${{ !success() }}
+        uses: dawidd6/action-send-mail@v6
+        with:
+          server_address: ${{ secrets.EMAIL_SERVER }}
+          server_port: ${{ secrets.EMAIL_PORT || '465' }}
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          secure: true
+          convert_markdown: true
+          from: GitHub Actions <developers+github@juit.com>
+          to: Juit Developers <developers+github@juit.com>
+          subject: "[${{ job.status }}] ${{ github.workflow }} in ${{ github.repository }}"
+          body: |
+            The GitHub Action "${{ github.workflow }}" in repository "${{ github.repository }}" ${{ job.status == 'cancelled' && 'was canceled' || 'has failed' }}.
+
+            Build logs are available at ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          html_body: |
+            The GitHub Action **`${{ github.workflow }}`** in repository **`${{ github.repository }}`** ${{ job.status == 'cancelled' && 'was **canceled**' || 'has **failed**' }}.
+
+            Build logs are available _[here](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})_.
 
