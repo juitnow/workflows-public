@@ -9,13 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     name: Automatic Updates
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
       - name: Setup NodeJS
         uses: actions/setup-node@v4
         with:
           registry-url: https://registry.npmjs.org
           node-version: 24
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ steps.auto-update-token.outputs.token }}
+          persist-credentials: true
+          fetch-depth: 0
       - name: Generate GitHub App Token
         uses: actions/create-github-app-token@v2
         id: auto-update-token
@@ -41,7 +45,6 @@ jobs:
           git commit -a -m "Release for automatic updates $(date '+%Y-%m-%d %H:%M:%S')"
           git push -u origin '${{ github.ref_name }}'
         env:
-          GITHUB_TOKEN: ${{ steps.auto-update-token.outputs.token }}
           PGPASSWORD: github
           PGHOST: localhost
           PGUSER: github
