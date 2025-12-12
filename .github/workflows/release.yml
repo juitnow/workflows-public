@@ -3,11 +3,7 @@
 # =================================================== #
 
 name: Release Package
-on:
-  workflow_call:
-    secrets:
-      git_token:
-        required: false
+on: workflow_call
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -15,8 +11,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.git_token || github.token }}
       - name: Setup NodeJS
         uses: actions/setup-node@v4
         with:
@@ -53,8 +47,6 @@ jobs:
 
           node -e 'process.exitCode=require("./package.json").workspaces?1:0' && \
             npm publish || npm publish --workspaces
-        env:
-          GH_TOKEN: ${{ github.token }}
       - name: Send Email Notification
         if: ${{ !success() }}
         uses: dawidd6/action-send-mail@v6
