@@ -1,0 +1,12 @@
+# ============================================================================ #
+# AUTOMATIC UPDATES AUTHENTICATION                                             #
+# ---------------------------------------------------------------------------- #
+# Generate a GitHub App token for authentication                               #
+# ============================================================================ #
+
+name: Generate GitHub App Token
+uses: actions/create-github-app-token@v2
+id: auto-update-token
+with:
+  app-id: ${{ secrets.AUTO_UPDATES_APP_ID }}
+  private-key: ${{ secrets.AUTO_UPDATES_APP_PRIVATE_KEY }}
