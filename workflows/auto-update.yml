@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - !include ../steps/setup-node.yml
-      - !include ../steps/auto-update-checkout.yml
       - !include ../steps/auto-update-auth.yml
+      - !include ../steps/auto-update-checkout.yml
       - !include ../steps/auto-update.yml
       - !include ../steps/email.yml

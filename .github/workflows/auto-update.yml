@@ -14,18 +14,18 @@ jobs:
         with:
           registry-url: https://registry.npmjs.org
           node-version: 24
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          token: ${{ steps.auto-update-token.outputs.token }}
-          persist-credentials: true
-          fetch-depth: 0
       - name: Generate GitHub App Token
         uses: actions/create-github-app-token@v2
         id: auto-update-token
         with:
           app-id: ${{ secrets.AUTO_UPDATES_APP_ID }}
           private-key: ${{ secrets.AUTO_UPDATES_APP_PRIVATE_KEY }}
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ steps.auto-update-token.outputs.token }}
+          persist-credentials: true
+          fetch-depth: 0
       - name: Check and apply dependencies updates
         run: |
           # Check for updates, and exit script on error / no updates found
