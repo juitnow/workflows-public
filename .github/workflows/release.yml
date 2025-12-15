@@ -43,8 +43,8 @@ jobs:
 
           test -z "$(git ls-remote --tags origin "v${VERSION}")" || {
             echo "Release ${VERSION} already tagged, exiting..."
-            echo "::notice::Release ${VERSION} already tagged"
-            exit 0
+            echo "::error::Release ${VERSION} already tagged"
+            exit 1
           }
 
           node -e 'process.exitCode=require("./package.json").workspaces?1:0' && \
