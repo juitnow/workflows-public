@@ -1,6 +1,16 @@
 name: &name Build Package (with DB)
 
-on: workflow_call
+on:
+  workflow_call:
+    secrets:
+      EMAIL_SERVER:
+        required: true
+      EMAIL_PORT:
+        required: false
+      EMAIL_USERNAME:
+        required: true
+      EMAIL_PASSWORD:
+        required: true
 
 jobs:
   build:
