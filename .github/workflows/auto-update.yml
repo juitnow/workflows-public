@@ -3,7 +3,21 @@
 # =================================================== #
 
 name: Automatic Updates
-on: workflow_call
+on:
+  workflow_call:
+    secrets:
+      AUTO_UPDATES_APP_ID:
+        required: true
+      AUTO_UPDATES_APP_PRIVATE_KEY:
+        required: true
+      EMAIL_SERVER:
+        required: true
+      EMAIL_PORT:
+        required: false
+      EMAIL_USERNAME:
+        required: true
+      EMAIL_PASSWORD:
+        required: true
 jobs:
   auto-update:
     runs-on: ubuntu-latest
