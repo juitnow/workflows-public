@@ -1,6 +1,6 @@
 name: Send Email Notification
 if: ${{ !success() }}
-uses: dawidd6/action-send-mail@v6
+uses: dawidd6/action-send-mail@v14
 with:
   server_address: ${{ secrets.EMAIL_SERVER }}
   server_port: ${{ secrets.EMAIL_PORT || '465' }}

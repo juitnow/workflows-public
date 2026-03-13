@@ -35,7 +35,7 @@ jobs:
           app-id: ${{ secrets.AUTO_UPDATES_APP_ID }}
           private-key: ${{ secrets.AUTO_UPDATES_APP_PRIVATE_KEY }}
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           token: ${{ steps.auto-update-token.outputs.token }}
           persist-credentials: true
@@ -65,7 +65,7 @@ jobs:
           PGPORT: 5432
       - name: Send Email Notification
         if: ${{ !success() }}
-        uses: dawidd6/action-send-mail@v6
+        uses: dawidd6/action-send-mail@v14
         with:
           server_address: ${{ secrets.EMAIL_SERVER }}
           server_port: ${{ secrets.EMAIL_PORT || '465' }}
