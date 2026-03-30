@@ -5,7 +5,7 @@
 # ============================================================================ #
 
 name: Generate GitHub App Token
-uses: actions/create-github-app-token@v2
+uses: actions/create-github-app-token@v3
 id: auto-update-token
 with:
   app-id: ${{ secrets.AUTO_UPDATES_APP_ID }}
